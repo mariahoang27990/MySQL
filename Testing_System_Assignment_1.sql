@@ -4,6 +4,7 @@ USE testing_system;
 /*
 Create table department
 */
+DROP TABLE IF EXISTS department;
 CREATE TABLE department (
 DepartmentID TINYINT PRIMARY KEY AUTO_INCREMENT,
 DepartmentName VARCHAR(50) NOT NULL UNIQUE KEY
@@ -20,25 +21,27 @@ Email VARCHAR(50) NOT NULL UNIQUE,
 Username VARCHAR(50) NOT NULL UNIQUE, 
 FullName VARCHAR(50) NOT NULL,
 DepartmentID TINYINT,
-CONSTRAINT FOREIGN KEY fk_account_department(DepartmentID) REFERENCES department(DepartmentID),
-PositionID TINYINT,
-CONSTRAINT FOREIGN KEY fk_account_position(PositionID) REFERENCES `position`(PositionID),
-CreateDate DATE NOT NULL
+PositionID SMALLINT,
+CreateDate DATE NOT NULL,
+foreign key (departmentid) references department(departmentid),
+foreign key (PositionID) references `position`(PositionID)
+
 );
+
 
 CREATE TABLE `group`(
 GroupID TINYINT PRIMARY KEY AUTO_INCREMENT,
 GroupName VARCHAR(50) NOT NULL UNIQUE,
-CreatorID TINYINT,
-CONSTRAINT FOREIGN KEY fk_group_account(AccountID) REFERENCES `account`(AccountID),
+CreatorID SMALLINT,
+ FOREIGN KEY (CreatorID) REFERENCES `account`(AccountID),
 CreateDate DATE NOT NULL
 );
 
 CREATE TABLE `groupaccount`(
 GroupID TINYINT,
-CONSTRAINT FOREIGN KEY fk_groupaccount_group(GroupID) REFERENCES `group`(GroupID),
+ FOREIGN KEY(GroupID) REFERENCES `group`(GroupID),
 AccountID SMALLINT, 
-CONSTRAINT FOREIGN KEY fk_groupaccount_account(AccountID) REFERENCES `account`(AccountID),
+ FOREIGN KEY (AccountID) REFERENCES `account`(AccountID),
 JointDate DATE NOT NULL
 );
 
@@ -56,11 +59,11 @@ CREATE TABLE `Question`(
 QuestionID TINYINT PRIMARY KEY AUTO_INCREMENT,
 Content TEXT NOT NULL,
 CategoryID TINYINT,
-CONSTRAINT FOREIGN KEY fk_question_categoryquestion(CategoryID) REFERENCES `CategoryQuestion`(CategoryID),
+ FOREIGN KEY (CategoryID) REFERENCES `CategoryQuestion`(CategoryID),
 TypeID TINYINT,
-CONSTRAINT FOREIGN KEY fk_question_typequestion(TypeID) REFERENCES `TypeQuestion`(TypeID),
-CreatorID TINYINT,
-CONSTRAINT FOREIGN KEY fk_question_account(AccountID) REFERENCES `account`(AccountID),
+FOREIGN KEY (TypeID) REFERENCES `TypeQuestion`(TypeID),
+CreatorID SMALLINT,
+FOREIGN KEY(CreatorID) REFERENCES `account`(AccountID),
 CreateDate DATE NOT NULL
 );
 
@@ -68,7 +71,7 @@ CREATE TABLE `Answer`(
 AnswerID SMALLINT PRIMARY KEY AUTO_INCREMENT,
 Content TEXT NOT NULL,
 QuestionID TINYINT,
-CONSTRAINT FOREIGN KEY fk_answer_question(QuestionID) REFERENCES `Question`(QuestionID),
+ FOREIGN KEY (QuestionID) REFERENCES `Question`(QuestionID),
 isCorrect BOOLEAN NOT NULL
 );
 
@@ -77,16 +80,18 @@ ExamID SMALLINT PRIMARY KEY AUTO_INCREMENT,
 `Code` VARCHAR(30),
 Title VARCHAR (50) NOT NULL,
 CategoryID TINYINT,
-CONSTRAINT FOREIGN KEY fk_exam_categoryquestion(CategoryID) REFERENCES `CategoryQuestion`(CategoryID),
+FOREIGN KEY (CategoryID) REFERENCES `CategoryQuestion`(CategoryID),
 Duration TINYINT NOT NULL,
-CreatorID TINYINT,
-CONSTRAINT FOREIGN KEY fk_exam_account(AccountID) REFERENCES `account`(AccountID),
+CreatorID SMALLINT,
+ FOREIGN KEY (CreatorID) REFERENCES `account`(AccountID),
 CreateDate DATE NOT NULL
 );
 
 CREATE TABLE `examquestion`(
 ExamID SMALLINT,
-CONSTRAINT FOREIGN KEY fk_examquestion_exam(ExamID) REFERENCES `exam`(ExamID),
+ FOREIGN KEY (ExamID) REFERENCES `exam`(ExamID),
 QuestionID TINYINT,
-CONSTRAINT FOREIGN KEY fk_examquestion_question(QuestionID) REFERENCES `Question`(QuestionID)
+ FOREIGN KEY (QuestionID) REFERENCES `Question`(QuestionID)
 );
+
+
