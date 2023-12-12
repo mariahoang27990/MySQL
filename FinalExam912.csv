@@ -1,0 +1,11 @@
+Id,FullName,Email,Password,ExpInYear,ProSkill,ProjectId,Role
+1,"Nguyễn Khánh Linh",nguyenkhanhlinh@gmail.com,linhnk,NULL,NULL,1,ADMIN
+2,"Hoàng Trung Dũng",hoangtrungdung@gmail.com,dunght,NULL,NULL,2,ADMIN
+3,"Lê Thị Mầu",lethimau@gmail.com,mault,null,NULL,2,MANAGER
+4,"Tô Văn Khiêm",tovankhiem@gmail.com,khiemtv,10,NULL,1,MANAGER
+5,"Hồ Tùng Mậu",hotungmau@gmail.com,mauht,7,NULL,3,MANAGER
+6,"Lương Định Của",luongdinhcua@gmail.com,cuald,NULL,dev,1,EMPLOYEE
+7,"Trần Não",trannao@gmail.com,naot,NULL,test,1,EMPLOYEE
+8,"Cao An Phú",caoanphu@gmail.com,phuca,NULL,csharp,2,EMPLOYEE
+9,"Hồ Xuân Hương",hoxuanhuong@gmail.com,huonghx,NULL,html,3,EMPLOYEE
+10,"Cao Văn Lầu",caovanlau@gmail.com,laucv,NULL,css,2,EMPLOYEE
